@@ -9,41 +9,41 @@ namespace WebApplication1.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class IssueController : ControllerBase
+    public class CollarController : ControllerBase
     {
-        private readonly IssueDbContext _context;
-        public IssueController(IssueDbContext context) => _context = context;
+        private readonly ApiDbContext _context;
+        public CollarController(ApiDbContext context) => _context = context;
 
         [HttpGet]
-        public async Task<IEnumerable<Issue>> Get()
-            => await _context.Issues.ToListAsync();
+        public async Task<IEnumerable<Collar>> Get()
+            => await _context.Collars.ToListAsync();
 
         [HttpGet("id")]
-        [ProducesResponseType(typeof(Issue), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(Collar), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetById(int id)
         {
-            var issue = await _context.Issues.FindAsync(id);
+            var issue = await _context.Collars.FindAsync(id);
             return issue == null ? NotFound() : Ok(issue);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Issue issue)
+        public async Task<IActionResult> Create(Collar collar)
         {
-            await _context.Issues.AddAsync(issue);
+            await _context.Collars.AddAsync(collar);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetById), new {id = issue.Id});  
+            return CreatedAtAction(nameof(GetById), new { id = collar.collar_id });
         }
 
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Update(int id, Issue issue)
+        public async Task<IActionResult> Update(int id, Collar collar)
         {
-            if (id != issue.Id) return BadRequest();
+            if (id != collar.collar_id) return BadRequest();
 
-            _context.Entry(issue).State = EntityState.Modified;
+            _context.Entry(collar).State = EntityState.Modified;
 
             await _context.SaveChangesAsync();
 
@@ -55,11 +55,11 @@ namespace WebApplication1.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Delete(int id)
         {
-            var issueToDelete = await _context.Issues.FindAsync(id);
+            var issueToDelete = await _context.Collars.FindAsync(id);
 
-            if(issueToDelete == null) return NotFound();
+            if (issueToDelete == null) return NotFound();
 
-            _context.Issues.Remove(issueToDelete);
+            _context.Collars.Remove(issueToDelete);
 
             await _context.SaveChangesAsync();
 

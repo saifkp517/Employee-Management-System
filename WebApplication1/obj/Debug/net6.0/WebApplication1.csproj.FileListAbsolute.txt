@@ -59,3 +59,9 @@ C:\Users\Saif5\source\repos\WebApplication1\WebApplication1\obj\Debug\net6.0\ref
 C:\Users\Saif5\source\repos\WebApplication1\WebApplication1\obj\Debug\net6.0\WebApplication1.pdb
 C:\Users\Saif5\source\repos\WebApplication1\WebApplication1\obj\Debug\net6.0\WebApplication1.genruntimeconfig.cache
 C:\Users\Saif5\source\repos\WebApplication1\WebApplication1\obj\Debug\net6.0\ref\WebApplication1.dll
+C:\Users\Saif5\source\repos\WebApplication1\WebApplication1\bin\Debug\net6.0\System.Web.Cors.dll
+C:\Users\Saif5\source\repos\WebApplication1\WebApplication1\bin\Debug\net6.0\System.Net.Http.Formatting.dll
+C:\Users\Saif5\source\repos\WebApplication1\WebApplication1\bin\Debug\net6.0\System.Web.Http.dll
+C:\Users\Saif5\source\repos\WebApplication1\WebApplication1\bin\Debug\net6.0\System.Web.Http.Cors.dll
+C:\Users\Saif5\source\repos\WebApplication1\WebApplication1\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\Saif5\source\repos\WebApplication1\WebApplication1\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
