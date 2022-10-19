@@ -7,6 +7,7 @@ import Dashboard from './pages/Dashboard';
 import Registration from './pages/Registration'
 import Login from './pages/Login'
 import Department from "./pages/Departments"
+import Attendance from "./pages/Attendance"
 
 
 function App() {
@@ -20,7 +21,7 @@ function App() {
             <Route path="/Registration" element={<Registration />} />
             <Route path="/DashBoard" element={<Dashboard />} />
             <Route path="/Department" element={<Department />} />
-            
+            <Route path="/Attendance" element={<Attendance />} />
           </Routes>
         </div>
       </Router>

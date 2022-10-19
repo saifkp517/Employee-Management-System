@@ -82,7 +82,7 @@ export const mainListItems = (
       <ListItemIcon>
         <LayersIcon />
       </ListItemIcon>
-      <ListItemText primary="Attendance" />
+      <ListItemText primary="Attendance & Salary" />
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
