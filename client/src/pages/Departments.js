@@ -1,4 +1,3 @@
-import * as React from "react";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import MuiDrawer from "@mui/material/Drawer";
@@ -11,9 +10,19 @@ import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Container from "@mui/material/Container";
 import MenuIcon from "@mui/icons-material/Menu";
+import SearchBar from "material-ui-search-bar";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { mainListItems } from "./listItems";
-import SearchBar from "./SearchBar";
+import React, { useEffect, useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import Table from "@material-ui/core/Table";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Paper from "@material-ui/core/Paper";
+import axios from "axios";
 
 const drawerWidth = 240;
 
@@ -63,10 +72,44 @@ const Drawer = styled(MuiDrawer, {
 
 const mdTheme = createTheme();
 
+const useStyles = makeStyles({
+  table: {
+    minWidth: 650,
+  },
+});
+
 function DashboardContent() {
   const [open, setOpen] = React.useState(true);
+  const [rows, setRows] = useState([]);
+  const [searched, setSearched] = useState("");
+  const classes = useStyles();
+
   const toggleDrawer = () => {
     setOpen(!open);
+  };
+
+  useEffect(() => {
+    axios
+      .get("https://localhost:7260/api/Department")
+      .then((data) => {
+        console.log(data.data);
+        setRows(data.data);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }, []);
+
+  const requestSearch = (searchedVal) => {
+    const filteredRows = rows.filter((row) => {
+      return row.departmentName.toLowerCase().includes(searchedVal.toLowerCase());
+    });
+    setRows(filteredRows);
+  };
+
+  const cancelSearch = () => {
+    setSearched("");
+    requestSearch(searched);
   };
 
   return (
@@ -131,8 +174,43 @@ function DashboardContent() {
           }}
         >
           <Toolbar />
+
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <SearchBar />
+          <h1>Search all Users Under a Specific Department</h1>
+            <Paper>
+              <SearchBar
+                value={searched}
+                onChange={(searchVal) => requestSearch(searchVal)}
+                onCancelSearch={() => cancelSearch()}
+              />
+              <TableContainer>
+                <Table className={classes.table} aria-label="simple table">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Name</TableCell>
+                      <TableCell align="right">Department</TableCell>
+                      <TableCell align="right">Email</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {rows.map((row) => {
+                      return (
+                        <TableRow key={row.name}>
+                          <TableCell component="th" scope="row">
+                            {row.name}
+                          </TableCell>
+                          <TableCell align="right">
+                            {row.departmentName}
+                          </TableCell>
+                          <TableCell align="right">{row.email}</TableCell>
+                        </TableRow>
+                      );
+                    })}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </Paper>
+            <br />
           </Container>
         </Box>
       </Box>

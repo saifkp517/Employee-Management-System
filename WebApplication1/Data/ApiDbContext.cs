@@ -16,8 +16,9 @@ namespace WebApplication1.Data
 
         public DbSet<Collar> Collars { get; set; }
 
+        public DbSet<Login> LoggedIn { get; set; }
+
         public DbSet<Shift> Shifts { get; set; }
 
-        public DbSet<Login> LoggedIn { get; set; }
     }
 }

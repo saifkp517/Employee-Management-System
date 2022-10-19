@@ -10,7 +10,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../App.css";
 
@@ -25,6 +25,8 @@ function App() {
     const data = new FormData(event.currentTarget);
 
     axios.get("https://localhost:7260/api/Registration").then((res) => {
+      console.log("hey");
+
       let userarray = [];
 
       for (let i = 0; i < res.data.length; i++) {
@@ -45,7 +47,7 @@ function App() {
           })
           .then(() => {
             console.log("submitted!");
-            navigate("/DashBoard")
+            navigate("/DashBoard");
           })
           .catch((err) => console.log(err));
       } else {
